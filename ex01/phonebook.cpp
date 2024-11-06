@@ -1,4 +1,13 @@
 #include <iostream>
+#include <iomanip>
+
+std::string    truncate(const std::string &str)
+{
+    if (str.length() > 8)
+        return (str.substr(0, 8) + ".");
+    else
+        return (str);
+}
 
 class Contact
 {
@@ -26,13 +35,15 @@ public:
 		this->darkest_secret = darkest_secret;
 	}
 
-	void displayContact() const
+	void displayContact(int i) const
 	{
-		std::cout << "First Name: " << first_name
-		<< ", Last Name: " << last_name
-		<< ", Nickname: " << nickname
-		<< ", Phone Number: " << phone_number
-		<< std::endl;
+		std::cout << std::right
+        << "Contact: " << std::setw(10) << i + 1 << " |"
+        << " First Name: " << std::setw(10) << truncate(first_name) << " |"
+		<< " Last Name: " << std::setw(10) << truncate(last_name) << " |"
+		<< " Nickname: " << std::setw(10) << truncate(nickname) << " |"
+		<< " Phone Number: " << std::setw(10) << truncate(phone_number)
+        << std::endl;
 	}
 };
 
@@ -71,8 +82,8 @@ public:
 			i = 0;
 			while (i < contact_count)
 			{
-				std::cout << "Contact " << i + 1 << ": ";
-				contacts[i].displayContact();
+				//std::cout << "Contact " << i + 1 << ": ";
+				contacts[i].displayContact(i);
 				i++;
 			}
 		}
