@@ -35,6 +35,12 @@ public:
 		this->darkest_secret = darkest_secret;
 	}
 
+    std::string getFirstName() const { return first_name; }
+    std::string getLastName() const { return last_name; }
+    std::string getNickname() const { return nickname; }
+    std::string getPhoneNumber() const { return phone_number; }
+    std::string getDarkestSecret() const { return darkest_secret; }
+
 	void displayContact(int i) const
 	{
 		std::cout << std::right
