@@ -1,5 +1,5 @@
 NAME     := Account
-SRCS     := Account.cpp
+SRCS     := Account.cpp tests.cpp
 OBJS     := $(SRCS:.cpp=.o)
 CXX      := g++
 CXXFLAGS := -Wall -Werror -Wextra
