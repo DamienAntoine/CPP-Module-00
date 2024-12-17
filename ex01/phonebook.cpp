@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <limits>
 
 std::string    truncate(const std::string &str)
 {
@@ -40,6 +41,15 @@ public:
     std::string getNickname() const { return nickname; }
     std::string getPhoneNumber() const { return phone_number; }
     std::string getDarkestSecret() const { return darkest_secret; }
+
+    void displayFullContact() const
+    {
+        std::cout << "First Name: " << first_name << std::endl;
+        std::cout << "Last Name: " << last_name << std::endl;
+        std::cout << "Nickname: " << nickname << std::endl;
+        std::cout << "Phone Number: " << phone_number << std::endl;
+        std::cout << "Darkest Secret: " << darkest_secret << std::endl;
+    }
 
 	void displayContact(int i) const
 	{
@@ -88,10 +98,18 @@ public:
 			i = 0;
 			while (i < contact_count)
 			{
-				//std::cout << "Contact " << i + 1 << ": ";
 				contacts[i].displayContact(i);
 				i++;
 			}
+            int index;
+            std::cout << "Enter the index of the contact to view more details (1 to " << contact_count << "): ";
+            std::cin >> index;
+
+            if (index < 1 || index > contact_count)
+                std::cout << "Invalid index." << std::endl;
+            else
+                contacts[index - 1].displayFullContact();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
 	}
 };
@@ -116,7 +134,11 @@ int	main()
 	{
 		std::cout << "Enter command." << std::endl;
 		std::cout << "(Available commands : ADD ; SEARCH ; EXIT)" << std::endl;
-		std::getline(std::cin, command);
+		if (!std::getline(std::cin, command))
+        {
+            std::cout << "\nExiting." << std::endl;
+            break;
+        }
 
 		if (command == "ADD" || command == "add")
 		{
